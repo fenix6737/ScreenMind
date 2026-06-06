@@ -1,0 +1,27 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 「v1.0.0」などのタグがプッシュされたら起動
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # リリースを作成するために必要な権限
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # --- [ここにあなたのアプリに応じたビルド処理が入ります] ---
+    # 例：ZIPファイル（app.zip）を作成する処理など
+    # --------------------------------------------------
+
+    - name: Create Release and Upload Asset
+      uses: softprops/action-gh-release@v2
+     with:
+      fail_on_unmatched_files: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
