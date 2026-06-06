@@ -25,12 +25,11 @@ jobs:
 
     - name: Build EXE
       run: |
-        # srcフォルダ内にあるPythonファイルを自動で探してEXE化します
-        cd src
+        # フォルダ移動せず、目の前にあるPythonファイルを直接EXE化します
         pyinstaller --onefile --noconsole *.py --name ScreenMind
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: ScreenMind-Windows
-        path: src/dist/
+        path: dist/
