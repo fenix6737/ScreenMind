@@ -2,7 +2,7 @@ name: Auto Build
 
 on:
   push:
-    branches: [ "main" ] # ファイルがアップロードされたら即起動
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -25,7 +25,8 @@ jobs:
 
     - name: Build EXE
       run: |
-        pyinstaller build/ScreenMind.spec --clean
+        # specファイルを使わず、メインプログラムから直接安全にビルドします
+        pyinstaller --onefile --noconsole src/ScreenMind_v4.1_AutoBuild_Final.py --name ScreenMind
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
